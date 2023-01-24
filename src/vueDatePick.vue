@@ -590,7 +590,7 @@ export default {
 
             this.inputValue = userText;
 
-            this.$emit('input', userDate
+            this.$emit('update:value', userDate
                 ? this.formatDateToString(userDate, this.format)
                 : userText
             );
@@ -739,7 +739,7 @@ export default {
 
         clear() {
 
-            this.$emit('input', '');
+            this.$emit('update:value', '');
 
         },
 
@@ -755,7 +755,7 @@ export default {
                     newDate.setSeconds(this.currentTime.seconds);
                 }
 
-                this.$emit('input', this.formatDateToString(newDate, this.format));
+                this.$emit('update:value', this.formatDateToString(newDate, this.format));
 
                 if (this.hasInputElement && !this.pickTime) {
                     this.close();
@@ -774,7 +774,7 @@ export default {
                 : currentHours - 12
             );
 
-            this.$emit('input', this.formatDateToString(currentDate, this.format));
+            this.$emit('update:value', this.formatDateToString(currentDate, this.format));
         },
 
         inputHours(event) {
@@ -791,7 +791,7 @@ export default {
                 : numValue
             );
             event.target.value = paddNum(numValue, 1);
-            this.$emit('input', this.formatDateToString(currentDate, this.format));
+            this.$emit('update:value', this.formatDateToString(currentDate, this.format));
 
         },
 
@@ -804,7 +804,7 @@ export default {
             event.target.value = paddNum(numValue, 2);
             currentDate[method](numValue);
 
-            this.$emit('input', this.formatDateToString(currentDate, this.format));
+            this.$emit('update:value', this.formatDateToString(currentDate, this.format));
 
         },
 
