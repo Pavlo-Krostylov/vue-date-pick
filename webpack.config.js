@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
+//const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+//const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -38,15 +39,6 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test: /\.(js|vue)$/,
-                loader: 'eslint-loader',
-                enforce: 'pre',
-                include: [
-                    path.join(__dirname, 'src'),
-                    path.join(__dirname, 'spec')
-                ],
-            },
-            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [
@@ -56,7 +48,7 @@ module.exports = {
         ]
     },
 
-    optimization: {
+    /*optimization: {
         minimizer: [
             new UglifyJsPlugin({
                 cache: true,
@@ -65,7 +57,7 @@ module.exports = {
             }),
             new OptimizeCSSAssetsPlugin({})
         ]
-    },
+    },*/
 
     resolve: {
         extensions: ['*', '.js', '.vue', '.json']
