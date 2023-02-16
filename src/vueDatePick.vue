@@ -72,38 +72,38 @@
                     </header>
                     <table class="vdpTable">
                         <thead>
-                            <tr>
-                                <th class="vdpHeadCell" v-for="(weekday, weekdayIndex) in weekdaysSorted" :key="weekdayIndex">
-                                    <span class="vdpHeadCellContent">{{weekday}}</span>
-                                </th>
-                            </tr>
+                        <tr>
+                            <th class="vdpHeadCell" v-for="(weekday, weekdayIndex) in weekdaysSorted" :key="weekdayIndex">
+                                <span class="vdpHeadCellContent">{{weekday}}</span>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody
                             :key="currentPeriod.year + '-' + currentPeriod.month"
                             :class="directionClass"
                         >
-                            <tr class="vdpRow" v-for="(week, weekIndex) in currentPeriodDates" :key="weekIndex">
-                                <td
-                                    class="vdpCell"
-                                    v-for="item in week"
-                                    :class="{
+                        <tr class="vdpRow" v-for="(week, weekIndex) in currentPeriodDates" :key="weekIndex">
+                            <td
+                                class="vdpCell"
+                                v-for="item in week"
+                                :class="{
                                         selectable: editable && !item.disabled,
                                         selected: item.selected,
                                         disabled: item.disabled,
                                         today: item.today,
                                         outOfRange: item.outOfRange
                                     }"
-                                    :data-id="item.dateKey"
-                                    :key="item.dateKey"
-                                    @click="editable && selectDateItem(item)"
-                                >
-                                    <slot name="cellContent" v-bind:item="item">
-                                        <div
-                                            class="vdpCellContent"
-                                        >{{ item.date.getDate() }}</div>
-                                    </slot>
-                                </td>
-                            </tr>
+                                :data-id="item.dateKey"
+                                :key="item.dateKey"
+                                @click="editable && selectDateItem(item)"
+                            >
+                                <slot name="cellContent" v-bind:item="item">
+                                    <div
+                                        class="vdpCellContent"
+                                    >{{ item.date.getDate() }}</div>
+                                </slot>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <div v-if="pickTime && currentTime" class="vdpTimeControls">
@@ -284,7 +284,7 @@ export default {
             return value
                 ? this.parseDateString(value, format)
                 : undefined
-            ;
+                ;
 
         },
 
@@ -488,7 +488,7 @@ export default {
                 : this.parseDate
                     ? this.parseDate(dateString, dateFormat)
                     : this.parseSimpleDateString(dateString, dateFormat)
-            ;
+                ;
 
         },
 
@@ -499,7 +499,7 @@ export default {
                 : this.formatDate
                     ? this.formatDate(date, dateFormat)
                     : this.formatSimpleDateToString(date, dateFormat)
-            ;
+                ;
 
         },
 
@@ -566,7 +566,7 @@ export default {
                 .replace(minutesRE, match => paddNum(date.getMinutes(), match.length))
                 .replace(secondsRE, match => paddNum(date.getSeconds(), match.length))
                 .replace(AMPMClockRE, match => isPM(date.getHours()) ? 'PM' : 'AM')
-            ;
+                ;
 
         },
 
@@ -590,7 +590,7 @@ export default {
 
             this.inputValue = userText;
 
-            this.$emit('update:value', userDate
+            this.$emit('update:modelValue', userDate
                 ? this.formatDateToString(userDate, this.format)
                 : userText
             );
@@ -739,7 +739,7 @@ export default {
 
         clear() {
 
-            this.$emit('update:value', '');
+            this.$emit('update:modelValue', '');
 
         },
 
@@ -755,7 +755,7 @@ export default {
                     newDate.setSeconds(this.currentTime.seconds);
                 }
 
-                this.$emit('update:value', this.formatDateToString(newDate, this.format));
+                this.$emit('update:modelValue', this.formatDateToString(newDate, this.format));
 
                 if (this.hasInputElement && !this.pickTime) {
                     this.close();
@@ -774,7 +774,7 @@ export default {
                 : currentHours - 12
             );
 
-            this.$emit('update:value', this.formatDateToString(currentDate, this.format));
+            this.$emit('update:modelValue', this.formatDateToString(currentDate, this.format));
         },
 
         inputHours(event) {
@@ -791,7 +791,7 @@ export default {
                 : numValue
             );
             event.target.value = paddNum(numValue, 1);
-            this.$emit('update:value', this.formatDateToString(currentDate, this.format));
+            this.$emit('update:modelValue', this.formatDateToString(currentDate, this.format));
 
         },
 
@@ -804,7 +804,7 @@ export default {
             event.target.value = paddNum(numValue, 2);
             currentDate[method](numValue);
 
-            this.$emit('update:value', this.formatDateToString(currentDate, this.format));
+            this.$emit('update:modelValue', this.formatDateToString(currentDate, this.format));
 
         },
 
@@ -823,7 +823,7 @@ function paddNum(num, padsize) {
             ? num
             : new Array(padsize - num.toString().length + 1).join('0') + num
         : undefined
-    ;
+        ;
 
 }
 
@@ -844,7 +844,7 @@ function areSameDates(date1, date2) {
     return (date1.getDate() === date2.getDate()) &&
         (date1.getMonth() === date2.getMonth()) &&
         (date1.getFullYear() === date2.getFullYear())
-    ;
+        ;
 
 }
 
@@ -871,7 +871,7 @@ function to24HourClock(hours, PM) {
     return PM
         ? (hours === 12 ? hours : hours + 12)
         : (hours === 12 ? 0 : hours)
-    ;
+        ;
 
 }
 
